@@ -47,8 +47,8 @@ ADD CONSTRAINT usuarios_username_ck
 CHECK (username in ('HR', 'ADMIN'));
 
 ALTER TABLE usuarios
-ADD CONSTRAINT usuario_ permissao_ck
-CHECK (permissao in ('C', 'A'));
+ADD CONSTRAINT usuarios_permissao_ck
+CHECK (permissao IN ('C', 'A'));
 
 
 -- Trigger Para sequencia de ID
