@@ -9,7 +9,7 @@ CREATE TABLE alunos
 (
     id_aluno    NUMBER  (10)   NOT NULL,
     status      VARCHAR2 (1)   DEFAULT 'N' NOT NULL,
-    nome        VARCHAR2 (100)  NOT NULL,
+    nome        VARCHAR2 (100)  NOT NULL
 );
 
 -- Adicionando Constraints tabela alunos
@@ -34,7 +34,7 @@ NOCACHE;
 CREATE TABLE usuarios
 (
     username    VARCHAR2    (25)   NOT NULL,
-    permissao   VARCHAR2    (1)    NOT NULL,
+    permissao   VARCHAR2    (1)    NOT NULL
 );
 
 --Criando Constrait Usuarios
