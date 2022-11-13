@@ -68,7 +68,7 @@ DECLARE
     v_permissao   VARCHAR2(1);
 BEGIN
     SELECT permissao INTO v_permissao 
-    FROM usuario
+    FROM usuarios
     WHERE upper(username) = upper(user);
 
     IF v_permissao = 'C' AND :old.status = 'S' then
