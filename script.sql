@@ -56,7 +56,7 @@ CREATE OR REPLACE TRIGGER id_aluno
 BEFORE INSERT ON alunos
 FOR EACH ROW
 BEGIN
-    :new.cod := seq_alunos.nextval;
+    :new.id_aluno := seq_alunos.nextval;
 END;
 /
 
@@ -71,9 +71,9 @@ BEGIN
     FROM usuario
     WHERE upper(username) = upper(user);
 
-    IF v_permissao = 'C' AND :old.fializado = 'S' then
+    IF v_permissao = 'C' AND :old.status = 'S' then
         raise_application_error(-20000, 'Não é possiel alterar os dados de um Aluno que já Finalizou ');
-    ELSIF v_permissao = 'A' AND :old.finalizado = 'S' AND DELETING then
+    ELSIF v_permissao = 'A' AND :old.status = 'S' AND DELETING then
         raisse_application_error(-20001, 'Não é possivel deletar os dados de um Aluno já finalizado');
     END IF;
     
@@ -82,8 +82,8 @@ END;
 
 -- INSERTS
 
-insert into usuario values ('HR', 'C');
-insert into usuario values ('ADMIN', 'A');
+insert into usuarios values ('HR', 'C');
+insert into usuarios values ('ADMIN', 'A');
 
 --Criando Usuario, Conectando usuario, Updates...
 
@@ -97,13 +97,13 @@ CONNECT ADMIN/123@localhost:1521/xepdb1;
 insert into system.alunos (nome) values ('Andre');
 insert into system.alunos (nome) values ('Varejao');
 
-update system.alunos set finalizado = 'N' where cod=2;
+update system.alunos set status = 'N' where cod=2;
 
-delete system.alunos where cod=2;
+delete system.alunos where id_aluno=2;
 
-update system.alunos set finalizado = 'S' where cod=2;
+update system.alunos set status = 'S' where cod=2;
 
-delete system.alunos where cod=2;
+delete system.alunos where id_aluno=2;
 
 
 
