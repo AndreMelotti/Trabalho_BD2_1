@@ -50,7 +50,6 @@ ALTER TABLE usuarios
 ADD CONSTRAINT usuarios_permissao_ck
 CHECK (permissao IN ('C', 'A'));
 
-
 -- Trigger Para sequencia de ID
 CREATE OR REPLACE TRIGGER id_aluno
 BEFORE INSERT ON alunos
@@ -71,10 +70,10 @@ BEGIN
     FROM usuarios
     WHERE upper(username) = upper(user);
 
-    IF v_permissao = 'C' AND :old.status = 'S' then
+    IF UPDATING AND v_permissao = 'C' AND :old.status = 'S' then
         raise_application_error(-20000, 'Não é possiel alterar os dados de um Aluno que já Finalizou ');
     ELSIF v_permissao = 'A' AND :old.status = 'S' AND DELETING then
-        raisse_application_error(-20001, 'Não é possivel deletar os dados de um Aluno já finalizado');
+        raise_application_error(-20001, 'Não é possivel deletar os dados de um Aluno já finalizado');
     END IF;
     
 END;
@@ -89,22 +88,18 @@ insert into usuarios values ('ADMIN', 'A');
 
 DROP USER "ADMIN";
 CREATE USER "ADMIN" IDENTIFIED BY "123";
-GRANT SELECT, UPDATE, INSERT, DELETE ON system.alunos to ADMIN;
+GRANT SELECT, UPDATE, INSERT, DELETE ON HR.alunos to ADMIN;
 GRANT CREATE SESSION TO "ADMIN";
 
 CONNECT ADMIN/123@localhost:1521/xepdb1;
 
-insert into system.alunos (nome) values ('Andre');
-insert into system.alunos (nome) values ('Varejao');
+insert into HR.alunos (nome) values ('Andre');
+insert into HR.alunos (nome) values ('Varejao');
 
-update system.alunos set status = 'N' where id_aluno=2;
+update HR.alunos set status = 'N' where id_aluno=2;
 
-delete system.alunos where id_aluno=2;
+delete HR.alunos where id_aluno=2;
 
-update system.alunos set status = 'S' where id_aluno=2;
+update HR.alunos set status = 'S' where id_aluno=2;
 
-delete system.alunos where id_aluno=2;
-
-
-
-
+delete HR.alunos where id_aluno=2;
