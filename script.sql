@@ -97,11 +97,11 @@ CONNECT ADMIN/123@localhost:1521/xepdb1;
 insert into system.alunos (nome) values ('Andre');
 insert into system.alunos (nome) values ('Varejao');
 
-update system.alunos set status = 'N' where cod=2;
+update system.alunos set status = 'N' where id_aluno=2;
 
 delete system.alunos where id_aluno=2;
 
-update system.alunos set status = 'S' where cod=2;
+update system.alunos set status = 'S' where id_aluno=2;
 
 delete system.alunos where id_aluno=2;
 
