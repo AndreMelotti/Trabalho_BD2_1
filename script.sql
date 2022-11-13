@@ -56,7 +56,7 @@ CREATE OR REPLACE TRIGGER id_aluno
 BEFORE INSERT ON alunos
 FOR EACH ROW
 BEGIN
-    :new.cod := seq_alunos.nextval:
+    :new.cod := seq_alunos.nextval;
 END;
 /
 
