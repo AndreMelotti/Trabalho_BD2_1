@@ -1,5 +1,5 @@
-DROP TABLE alunos cascade;
-DROP TABLE usuarios cascade;
+DROP TABLE alunos cascade constraint;
+DROP TABLE usuarios cascade constraint;
 DROP SEQUENCE seq_alunos;
 
 
