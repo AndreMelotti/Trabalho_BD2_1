@@ -1,8 +1,11 @@
-DROP TABLE alunos;
+DROP TABLE alunos cascade;
+DROP TABLE usuarios cascade;
+DROP SEQUENCE seq_alunos;
+
 
 -- Criando Tabela alunos
 
-CREATE TABLE alunos
+CREATE TABLE alunos 
 (
     id_aluno    NUMBER  (10)   NOT NULL,
     status      VARCHAR2 (1)   DEFAULT 'N' NOT NULL,
@@ -26,12 +29,12 @@ MAXVALUE        99999
 MINVALUE        1
 NOCACHE;
 
-DROP TABLE usuarios;
 
 -- Criando Tabela usuarios
-CREATE TABLE usuarios(
+CREATE TABLE usuarios
+(
     username    VARCHAR2    (25)   NOT NULL,
-    permissao   VARCHAR2    (2)    NOT NULL,
+    permissao   VARCHAR2    (1)    NOT NULL,
 );
 
 --Criando Constrait Usuarios
